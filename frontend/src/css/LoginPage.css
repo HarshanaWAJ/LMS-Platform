@@ -1,0 +1,161 @@
+.loginpage {
+  background-image: url('https://i.gifer.com/DdaO.gif'); 
+  background-size: 50% !important; 
+  background-size: cover; 
+  background-position: Left;
+  background-repeat: no-repeat; 
+}
+
+
+.page-container {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center; 
+  min-height: 100vh; 
+  margin-left: 400px; 
+}
+
+/* Your existing login form styles go here */
+.login-form {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .form-group input:focus {
+    border-color: #007bff; /* Change border color on input focus to blue */
+    outline: none; /* Remove the default outline style */
+  }
+  
+  .loginbtn {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: black;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: "YourCustomFont", sans-serif; /* Replace with your custom font */
+    cursor: pointer;
+    transition: background-color 0.7s ease;
+    text-transform: uppercase; /* Convert text to uppercase for a more stylized look */
+    letter-spacing: 1px; /* Add letter spacing for extra style */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+  }
+
+  .link-button {
+    text-decoration: none !important; 
+    color: inherit !important; 
+  }
+  
+  
+  .forgetpw {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .forgetpw a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .forgetpw a:hover {
+    color: #0056b3;
+  }
+  
+  .forgetpw .separator {
+    color: #555;
+    margin: 0 10px;
+  }
+  
+/* Define the keyframes for the animation */
+/* Define the keyframes for the animation */
+@keyframes loginHeaderAnimation {
+  0%, 100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to the loginHeader */
+.loginHeader {
+  font-size: 30px;
+  animation: loginHeaderAnimation 5s cubic-bezier(0.2, 0.7, 0.5, 1) infinite;
+  color: #007bff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+

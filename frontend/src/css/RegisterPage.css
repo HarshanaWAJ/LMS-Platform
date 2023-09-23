@@ -1,0 +1,55 @@
+.RegisterPage {
+    display: flex;
+    justify-content: center;
+    align-items: center !important; 
+    height: 100vh;
+    background-image: url('https://i.gifer.com/Odxj.gif'); 
+    background-size: 50% !important; 
+    background-size: cover; 
+    background-position: right;
+    background-repeat: no-repeat; 
+  }
+  
+  .register-page-container {
+    width: 500px;
+    margin-left: -500px; 
+  }
+  
+  .register-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .register-Header {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .register-form-group {
+    margin-bottom: 10px;
+  }
+  
+  .register-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000102;
+  }
+  
+  .register-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .register-form-group input:focus {
+    outline: 2px solid #007bff !important;
+  }
+  
+  .register-form-button {
+    display: flex;
+    justify-content: right ;
+    align-items: center !important; 
+  }
