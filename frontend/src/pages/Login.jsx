@@ -21,7 +21,7 @@ const Login = () => {
 
       // If the validation is successful, navigate to the home page
       if (Object.keys(errors).length === 0) {
-        window.location.href = '/home';
+        window.location.href = '/adminprofile';
       }
     };
 

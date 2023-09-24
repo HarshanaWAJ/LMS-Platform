@@ -3,9 +3,10 @@ import './App.css';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 // Import Pages
-import Home from './pages/Home';
+
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AdminDashboard from './pages/AdminDashboard';
 
 /* *root Routes* */
 const router = createBrowserRouter([
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
-    path: '/home', 
-    element: <Home/>
+    path: '/adminprofile', 
+    element: <AdminDashboard/>
   }, 
   {
     path: '/register',
