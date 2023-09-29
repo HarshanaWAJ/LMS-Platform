@@ -4,13 +4,17 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
+const morgan = require('morgan');
 
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
+//Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+app.use(morgan('tiny'));
+app.disable('x-powered-by');
 
 const URL = process.env.MONGODB_URL;
 
@@ -24,8 +28,6 @@ connection.once ("open", ()=> {
 //Routes for Users
 const userRouter = require('./routes/users.js');
 app.use("/user", userRouter);
-
-//Routes for login
 
 app.listen(PORT, () => {
     console.log(`Server is Running on Port: ${PORT}`);
