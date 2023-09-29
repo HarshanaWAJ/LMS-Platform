@@ -7,6 +7,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
+import ResetPassword from './pages/ResetPassword';
+
 
 /* *root Routes* */
 const router = createBrowserRouter([
@@ -22,6 +24,10 @@ const router = createBrowserRouter([
     path: '/register',
     element: <Register/>
   },
+  {
+    path :'/forgot-password',
+    element: <ResetPassword/>
+  }
 ])
 
 function App() {

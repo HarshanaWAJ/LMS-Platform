@@ -1,46 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../css/LoginPage.css"
 
+import {Toaster} from 'react-hot-toast';
+import {useFormik} from 'formik';
+
+import { loginValidate } from '../helper/loginValidate';
+
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      //Check the email and password are filled.
-      const errors = {};
-      if (!email) {
-        errors.email = 'Required';
-      }
-      if (!password) {
-        errors.password = 'Required';
-      }
-      setErrors(errors);
 
-      // If the validation is successful, navigate to the home page
-      if (Object.keys(errors).length === 0) {
-        window.location.href = '/admindashboard';
+    const formik = useFormik({
+      initialValues : {
+        email : '',
+        password : '',
+      },
+      validate: loginValidate,
+      validateOnBlur: false,
+      validateOnChange: false,
+      onSubmit: async values => {
+         console.log(values);
       }
-    };
-
+    });
   return (
     <div className='loginpage'>
+      <Toaster className='toaster' position='top center'reverseOrder={false} />
         <div className="page-container">
             <div className="login-form">
                 <h2 className='loginHeader'>LMS Login</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
                     <input
                     type="email"
                     id="email"
                     name="email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
+                    
+                    {...formik.getFieldProps('email')}
                     />
-                    {errors.email && <div className="error">{errors.email}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
@@ -48,8 +43,8 @@ const Login = () => {
                     type="password"
                     id="password"
                     name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
+                    
+                    {...formik.getFieldProps('password')}
                     />
                 </div>
                 <button className= "btn btn-outline-primary"type="submit">Login</button>
