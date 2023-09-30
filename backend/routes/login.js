@@ -3,6 +3,10 @@ let User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const {jwt} = require('jsonwebtoken');
 
+const dotenv = require('dotenv').config();
+
+const JWT = process.env.JWT_SECRET;
+
 // Other Routes For Users!!!
 /* --POST Methods-- */ 
 /* -------------------------------------------------------------------------------------------- */
@@ -23,10 +27,10 @@ router.route('/login').post(async(req, res) => {
         await User.findOne({email})
             .then(user => {
                 bcrypt.compare(password, user.password)
-                    .then(passwordCheck => {
-                        if (!password) {
-                            return res.status(400).send({Error: "Don't have a password"});
-                        }
+                    .then(password => {
+                        
+                        if (!password) return res.status(400).send({Error: "Don't have a password"})
+                        
                          //JWT Token
                          const token = jwt.sign( {
                             userId :  user.id,
@@ -49,7 +53,7 @@ router.route('/login').post(async(req, res) => {
             })
     }
     catch (err) {
-        return res.status(500).send({message: err.message});
+        return res.status(500).send({message: err.message, msg: "Section 1"});
     }
 })
 
