@@ -7,69 +7,47 @@ const bcrypt = require('bcrypt');
 let User = require('../models/User.js');
 
 //Add User Data
-router.route("/add").post( async (req, res) => {
+router.route('/add').post(async (req, res) => {
     try {
-        const username = req.body.username;
-        const email = req.body.email;
-        const password = req.body.password;
-        const role = req.body.role;
-
-        //Check if the email already exists
-        const existingUserEmail = new Promise((resolve, reject) => {
-            User.findOne({email}, function (err, user) {
-                if (err) reject(new Error(err))
-                if (user) reject({error: "Email address already exists"});
-                resolve();
-            })
+      const username = req.body.username;
+      const email = req.body.email;
+      const password = req.body.password;
+      const role = req.body.role;
+  
+      // Check if the email already exists
+      const existingUserEmail = await User.findOne({ email });
+      if (existingUserEmail) {
+        throw new Error('Email address already exists');
+      }
+  
+      // Check if the username already exists
+      const existingUsername = await User.findOne({ username });
+      if (existingUsername) {
+        throw new Error('Username already exists');
+      }
+  
+      // If all of the checks passed, create a new user
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+  
+        const newUser = new User({
+          username,
+          email,
+          password: hashedPassword,
+          role,
         });
-
-        //Check if the username already exists
-        const existingUsername = new Promise((resolve, reject) => {
-            User.findOne({username}, function (err, user) {
-                if (err) reject(new Error(err))
-                if (user) reject({error: "Username already exists"});
-                resolve();
-            })
-        });
-
-        const promises = [existingUsername, existingUserEmail];
-
-        Promise.all(promises)
-            .then(() => {
-                if (password) {
-                    bcrypt.hash(password, 10)
-                        .then(hashedPassword => {
-                            const newUser = new User({
-                                username,
-                                email,
-                                password: hashedPassword,
-                                role
-                            })
-                            newUser.save()
-                                .then( ()=> {
-                                    res.status(200).send({status: "User Added"})
-                                })
-                                .catch( (err)=> {
-                                    res.status(500).send({status: err.status, msg:"Failed to add user"});
-                                    console.log(err);
-                                }) 
-                        })
-                        .catch((err) => {
-                            res.status(500).send({status: "Unable to hashed password"});
-                        });
-
-                }
-            })
-            .catch(err => {
-                res.status(500).send({status: err.status, msg: "Section 2"});
-            })
-
+  
+        await newUser.save();
+  
+        // Send a success response to the client
+        res.status(200).send({ status: 'User Added' });
+      }
+    } catch (error) {
+      // Handle any errors that occur
+      res.status(500).send({ status: error.status, msg: error.message });
     }
-    catch (error) {
-        res.status(500).send({status: error.status, msg: "Section 3"});
-    }
-    
-})
+  });
+  
 
 //Get User List
 router.route("/").get( async (req, res)=> {
