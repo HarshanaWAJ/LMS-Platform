@@ -10,7 +10,7 @@ router.route('/sendMail').post(async(req, res) => {
 
 //Authontication
 router.route('/authenticate').post(async(req, res) => {
-    res.json("Authontication Route")
+    res.end('Authentication');
 })
 
 //Login 

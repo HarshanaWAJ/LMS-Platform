@@ -8,10 +8,12 @@ const userSchema = new Schema({
     username : {
         type: String,
         required: true,
+        unique: [true, "Username Already Exists"]
     },
     email : {
         type: String,
-        required: true
+        required: true,
+        unique: [true, "Email Already Exists"]
     },
     password : {
         type: String,
