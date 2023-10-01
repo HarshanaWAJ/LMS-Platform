@@ -28,7 +28,7 @@ router.route('/add').post(async (req, res) => {
   
       // If all of the checks passed, create a new user
       if (password) {
-        const hashedPassword = await bcrypt.hashSync(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10)
   
         const newUser = new User({
           username,
@@ -48,7 +48,6 @@ router.route('/add').post(async (req, res) => {
     }
   });
   
-
 //Get User List
 router.route("/").get( async (req, res)=> {
    await User.find()
