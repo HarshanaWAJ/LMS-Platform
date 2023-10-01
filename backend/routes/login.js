@@ -2,6 +2,11 @@ const User = require('../models/User');
 
 const router =  require('express').Router();
 const bcrypt = require('bcrypt');
+const {jwt} = require('jsonwebtoken');
+
+const dotenv = require('dotenv').config();
+
+const JWT = process.env.JWT_SECRET;
 
 // Other Routes For Users!!!
 /* --POST Methods-- */ 
@@ -19,24 +24,39 @@ router.route('/authenticate').post(async(req, res) => {
 //Login 
 router.route('/login').post(async(req, res) => {
     const {email, password} = req.body;
-  
     try {
-      const user = await User.findOne({email});
-      if (!user) {
-        return res.status(404).send({status: 404, msg: 'User not found.'});
-      }
-      const passwordCheck = await bcrypt.compare(password, user.password);
-      if (!passwordCheck) {
-        return res.status(401).send({status: 401, msg: 'Incorrect password.'});
-      }
-  
-      // The password is valid and the user exists.
-      res.status(200).send({status: 200, msg: 'Logged in.'});
-    } catch (err) {
-      return res.status(500).send({status: 500, msg: 'Error with fetching user data.'});
+        await User.findOne({email})
+            .then(user => {
+                bcrypt.compare(password, user.password)
+                    .then(password => {
+                        
+                        if (!password) return res.status(400).send({Error: "Don't have a password"})
+                        
+                         //JWT Token
+                         const token = jwt.sign( {
+                            userId :  user.id,
+                            username : user.username,
+                            role : user.role 
+                         }, 'secret', {expiresIn: "1h"});
+
+                         return res.status(200).send(
+                            {msg: "Login successful",
+                            username : user.username,
+                            token}
+                            )
+                    })
+                    .catch(err => {
+                        return res.status(400).send({Error: "Password is incorrect"});
+                    });
+            })
+            .catch(err => {
+                return res.status(404).send({Error: "Email Not Found!"});
+            })
     }
-  });
-  
+    catch (err) {
+        return res.status(500).send({message: err.message, msg: "Section 1"});
+    }
+})
 
 /* --GET Methods-- */
 /* -------------------------------------------------------------------------------------------- */
