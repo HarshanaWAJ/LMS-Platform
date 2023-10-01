@@ -103,4 +103,24 @@ router.route("/get/:id").get(async(req, res) => {
         })
 })
 
+
+/* ================================================================================================= */
+//Ger User Details By Email
+router.route("/getemail/:email").get(async (req, res) => {
+  const userEmail = req.params.email;
+  try {
+    if (!userEmail) {
+      return res.status(400).send({ error: "Empty Email" });
+    }
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
+    }
+    res.status(200).send({ message: "User found", userData: user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "An error occurred while getting the email" });
+  }
+});
+
 module.exports = router;
